@@ -10,6 +10,16 @@
     <div class="container">
         
         <div class="painel">
+            <h2>Registrar Novo Voo 📝</h2>
+            <div class="controles input-group">
+                <input type="text" id="input-origem" placeholder="Cidade de Origem">
+                <input type="text" id="input-destino" placeholder="Cidade de Destino">
+                <button id="btn-registrar">Registrar Voo</button>
+            </div>
+            <p id="avisoSistema" style="margin-top: 10px; font-weight: bold;"></p>
+        </div>
+
+        <div class="painel">
             <h1>Aeroporto Inteligente ✈️</h1>
             <img id="imagem-aviao" src="aviao.png" alt="Avião" width="150">
             <div id="info-voo">
@@ -25,19 +35,19 @@
         </div>
 
         <div class="painel" id="painel-jato">
-    <h2>Jato Executivo 🛩️</h2>
-    <div id="info-voo">
-        <p><strong>Voo:</strong> <span id="jato-codigo">---</span></p>
-        <p><strong>Altitude:</strong> <span id="jato-altitude">0</span> pés</p>
-        <p><strong>Supersônico:</strong> <span id="jato-status-super">Desativado</span></p>
-    </div>
-    <div class="controles">
-        <button id="btn-jato-decolar">Decolar</button>
-        <button id="btn-jato-pousar">Pousar</button> 
-        <button id="btn-super-on">Ativar Supersônico</button>
-        <button id="btn-super-off">Desativar Supersônico</button>
-    </div>
-</div>
+            <h2>Jato Executivo 🛩️</h2>
+            <div id="info-voo">
+                <p><strong>Voo:</strong> <span id="jato-codigo">---</span></p>
+                <p><strong>Altitude:</strong> <span id="jato-altitude">0</span> pés</p>
+                <p><strong>Supersônico:</strong> <span id="jato-status-super">Desativado</span></p>
+            </div>
+            <div class="controles">
+                <button id="btn-jato-decolar">Decolar</button>
+                <button id="btn-jato-pousar">Pousar</button> 
+                <button id="btn-super-on">Ativar Supersônico</button>
+                <button id="btn-super-off">Desativar Supersônico</button>
+            </div>
+        </div>
 
         <div class="painel" id="painel-carga">
             <h2>Voo Cargueiro 📦</h2>
@@ -53,6 +63,6 @@
 
     </div>
 
-    <script src="src/script.js"></script>
+    <script type="module" src="src/painel.js"></script>
 </body>
 </html>
