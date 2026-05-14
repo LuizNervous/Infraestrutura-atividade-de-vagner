@@ -48,15 +48,24 @@ document.getElementById('btn-registrar').addEventListener('click', () => {
     let mensagemTela = document.getElementById('avisoSistema');
 
     try {
-        console.log("Iniciando registro do voo...");
+        const novoVoo = new Voo("NEW-777", origemDigitada, destinoDigitado, "12:00"); 
+
         
-        // Tenta criar o voo com o que o usuário digitou
-        let vooTeste = new Voo("NEW-777", origemDigitada, destinoDigitado, "12:00"); 
-        
-        // Se a linha acima der erro (origem igual destino), a linha abaixo NUNCA será lida!
+        meuVoo.origem = novoVoo.origem;
+        meuVoo.destino = novoVoo.destino;
+        meuVoo.codigo = novoVoo.codigo;
+
+        // 3. MANDAMOS A TELA SE ATUALIZAR
+        carregarDadosIniciais();
+
         mensagemTela.innerText = "Voo cadastrado com sucesso!";
         mensagemTela.style.color = "green";
-    } 
+
+        // Limpa os campos para o próximo registro
+        document.getElementById('input-origem').value = "";
+        document.getElementById('input-destino').value = "";
+
+    }
     catch (erro) {
         console.error("Ops, algo deu errado. A equipe de resgate foi acionada.");
         // Mostra o erro na tela (Pega a mensagem que escrevemos lá no throw)
