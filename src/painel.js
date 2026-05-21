@@ -12,9 +12,7 @@ const meuVoo = new Voo('JS1024', 'São Paulo', 'Tóquio', '14:30');
 const meuJato = new JatoExecutivo('JT-001', 'Rio', 'Nova York');
 const meuCargueiro = new VooCarga('CG-999', 'Manaus', 'Miami', 50000);
     
-// ==========================================
-// 3. FUNÇÕES DE ATUALIZAÇÃO DA TELA (INTERFACE)
-// ==========================================
+
 function carregarDadosIniciais() {
     // Painel Principal
     document.getElementById('codigo').innerText = meuVoo.codigo;
@@ -37,11 +35,6 @@ function atualizarPainelJato() {
     document.getElementById('jato-status-super').innerText = meuJato.modoSupersonico ? 'Ativado 🔥' : 'Desativado';
 }
 
-// ==========================================
-// 4. EVENTOS DE CLIQUES
-// ==========================================
-
-// --- NOVO: EVENTO DE REGISTRAR VOO (AQUI FICA O TRY/CATCH) ---
 document.getElementById('btn-registrar').addEventListener('click', () => {
     let origemDigitada = document.getElementById('input-origem').value;
     let destinoDigitado = document.getElementById('input-destino').value;
