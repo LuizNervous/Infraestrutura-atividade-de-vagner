@@ -1,11 +1,13 @@
+
+
 /* RELATÓRIO DE AUDITORIA VIP
-Auditores: [Seu Nome] e [Nome do seu Colega]
+Auditores: [Luiz Gustavo] 
 
 1. Por que o código quebrou na linha do constructor do PassageiroVIP? O que faltava e para que serve?
-R: Quebrou porque quando usamos herança (extends), a subclasse é obrigada a chamar o método super() antes de usar a palavra 'this'. O super() serve para disparar o construtor da classe mãe (Passageiro) e inicializar as propriedades herdadas como o nome e o CPF.
+R: Quebrou porque quando usamos herança (extends), a subclasse é obrigada a chamar o método super() antes de usar a palavra this. O super() serve para disparar o construtor da classe mãe (Passageiro) e inicializar as propriedades herdadas como o nome e o CPF.
 
 2. Por que o método exibirCredencial() deu erro de privacidade? Como resolvemos isso usando o concept de Getter?
-R: Deu erro porque o atributo #cpf possui a hashtag (#), o que o torna privado da classe Passageiro. Subclasses não podem acessá-lo diretamente. Resolvemos isso chamando o Getter 'lerCpf' (sem os parênteses) que foi criado justamente para permitir a leitura controlada desse dado sensível.
+R: Deu erro porque o atributo #cpf possui a hashtag (#), o que o torna privado da classe Passageiro. Subclasses não podem acessá-lo diretamente. Resolvemos isso chamando o Getter 'lerCpf' que foi criado justamente para permitir a leitura desse dado.
 
 3. Por que a linha cliente1.#cpf = "000..." é considerada uma falha de segurança (Encapsulamento)?
 R: É uma falha porque viola o princípio do encapsulamento. Dados privados não podem ser alterados diretamente por fora da classe. Se qualquer um puder mudar o CPF à força, o sistema perde a confiabilidade e abre brechas de segurança.
