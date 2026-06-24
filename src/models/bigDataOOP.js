@@ -7,10 +7,10 @@ Auditores: Luiz Gustavo
 R: O 'filter()' literalmente filtra o seu array, fazendo-o diminuir de tamanho. Já o "map()" apenas muda a propriedade do dado para ele aparecer. Não mexendo no tamanho do array.
 
 2. O que o método '.reduce()' faz? Por que ele precisa de um parâmetro extra (o "acumulador") que o map e filter não precisam?
-R: 
+R: Ele junta todos os valores do array em um unico valor. Ele precisa do acumulador para salvar o valor que ele irá somar com o próximo valor do array, e assim por diante, até chegar no final do array.
 
 3. Por que o código usando "filter/map/reduce" (Declarativo) é considerado melhor no mercado de trabalho do que um monte de laços "for" (Imperativo)?
-R: [Expliquem sobre legibilidade de código]
+R: Pois é mais limpo e mais fácil de entender, do que o "for", que utiliza varias variaveis e laços, que pode acabar confundindo o programador.
 =========================================================
 */
 
