@@ -34,10 +34,10 @@ class Voo {
     mudarRota(novaOrigem, novoDestino) {
         this.origem = novaOrigem;
         this.destino = novoDestino;
-        
-        // Se for o voo principal, atualiza o SPAN 'rota' no HTML
+
+        // Atualiza o SPAN 'rota' no HTML se ele existir na página
         const elementoRota = document.getElementById('rota');
-        if (elementoRota && this.codigo === meuVoo.codigo) {
+        if (elementoRota) {
             elementoRota.innerText = `${this.origem} ➔ ${this.destino}`;
         }
         console.log(`Rota alterada: ${this.origem} para ${this.destino}`);
@@ -48,7 +48,7 @@ class Voo {
         const elementoStatus = document.getElementById('status');
         if (elementoStatus) {
             elementoStatus.innerText = this.status;
-            elementoStatus.className = ''; 
+            elementoStatus.className = '';
             if (classeCss) elementoStatus.classList.add(classeCss);
         }
     }
