@@ -13,12 +13,12 @@ R: Alteraremos apenas o 'PainelView.js'. Como o 'StorageService.js' está isolad
 R: Os ES6 Modules permitem organizar a aplicação em arquivos independentes que compartilham classes e funções com 'export' e 'import' sem poluir o escopo global.
 =========================================================
 */
-
 import Voo from './models/Voo.js';
 import JatoExecutivo from './models/Voorapido.js';
 import VooCarga from './models/VooCarga.js';
 import { StorageService } from './StorageService.js';
 import { PainelView } from './PainelView.js';
+import AgenteIoTService from './AgenteIoTService.js'; // 1. IMPORT DO AGENTE IOT
 
 // Inicialização dos Objetos
 const meuVoo = new Voo('JS1024', 'São Paulo', 'Tóquio', '14:30');
@@ -26,13 +26,29 @@ const meuJato = new JatoExecutivo('JT-001', 'Rio', 'Nova York');
 const meuCargueiro = new VooCarga('CG-999', 'Manaus', 'Miami', 50000);
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Renderização Inicial dos 4 Painéis
+    // Renderização Inicial
     PainelView.atualizarVooPrincipal(meuVoo);
     PainelView.atualizarJato(meuJato);
     PainelView.atualizarCarga(meuCargueiro);
-    PainelView.renderizarLista(StorageService.obterFrota());
+    
+    // Pega a frota do storage
+    let frotaGlobal = StorageService.obterFrota();
+    if (frotaGlobal.length === 0) {
+        // Se o banco estiver vazio, coloca o meuVoo como padrão para o robô monitorar
+        frotaGlobal.push(meuVoo);
+    }
+    PainelView.renderizarLista(frotaGlobal);
 
-    // 2. Eventos - Registro de Novo Voo
+    // 2. INSTANCIAÇÃO E ATIVAÇÃO DO AGENTE IOT
+    const agenteRobo = new AgenteIoTService(frotaGlobal, () => {
+        PainelView.renderizarLista(frotaGlobal);
+        PainelView.atualizarVooPrincipal(meuVoo);
+    });
+
+    // LIGA O ROBÔ ASSÍNCRONO
+    agenteRobo.iniciarMonitoramentoCorreto();
+
+    // Eventos - Registro de Novo Voo
     document.getElementById('btn-registrar')?.addEventListener('click', () => {
         const origem = document.getElementById('input-origem').value;
         const destino = document.getElementById('input-destino').value;
@@ -53,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 3. Eventos - Voo Principal
+    // Eventos - Voo Principal
     document.getElementById('btn-decolar')?.addEventListener('click', () => {
         meuVoo.decolar();
         PainelView.atualizarVooPrincipal(meuVoo);
@@ -64,28 +80,25 @@ document.addEventListener('DOMContentLoaded', () => {
         PainelView.atualizarVooPrincipal(meuVoo);
     });
 
-    // 4. Eventos - Jato Executivo
+    // Eventos - Jato
     document.getElementById('btn-jato-decolar')?.addEventListener('click', () => {
         meuJato.decolar();
         PainelView.atualizarJato(meuJato);
     });
-
     document.getElementById('btn-jato-pousar')?.addEventListener('click', () => {
         meuJato.pousar();
         PainelView.atualizarJato(meuJato);
     });
-
     document.getElementById('btn-super-on')?.addEventListener('click', () => {
         meuJato.ativarSupersonico();
         PainelView.atualizarJato(meuJato);
     });
-
     document.getElementById('btn-super-off')?.addEventListener('click', () => {
         meuJato.desativarSupersonico();
         PainelView.atualizarJato(meuJato);
     });
 
-    // 5. Eventos - Voo Cargueiro
+    // Eventos - Carga
     document.getElementById('btn-embarcar')?.addEventListener('click', () => {
         const inputPeso = document.getElementById('input-peso');
         const peso = parseInt(inputPeso.value);
